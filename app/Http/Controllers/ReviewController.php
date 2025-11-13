@@ -33,9 +33,15 @@ class ReviewController extends Controller
         return response()->json($review);
     }
 
-    public function destroy(Review $review)
+    public function destroy(string $id)
     {
-        $review->delete();
-        return response()->noContent();
+        $result=Review::where('id',$id)->firstOrFail();
+        if($result){
+            $result->delete();
+            return response()->json(['message'=>'Review is Deleted Successfully',200]);
+        }
+        else{
+            return response()->json(['message'=>'Review not found'],404);
+        }
     }
 }
