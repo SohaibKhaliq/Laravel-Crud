@@ -23,7 +23,7 @@ return new class extends Migration
             $table->integer('stock')->default(0);
             $table->text('short_description')->nullable();
             $table->longText('long_description')->nullable();
-            $table->string('status')->default('inactive');
+            $table->boolean('status')->default(true);
             $table->boolean('featured')->default(false);
             $table->timestamps();
         });
