@@ -16,8 +16,12 @@ class ProductImageController extends Controller
 
     public function store(Request $request)
     {
-        $img = ProductImage::create($request->all());
-        return response()->json($img, 201);
+        $validated = $request->validate([
+            'product_id' => 'required|exists:products,id',
+            'image_path' => 'required|url',
+            'alt_text' => 'nullable|string|max:255',
+        ]);
+
     }
 
     public function show(ProductImage $productImage)
